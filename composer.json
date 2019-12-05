@@ -1,0 +1,20 @@
+{
+  "name": "tavux/qonto-php",
+  "license": "MIT",
+  "description": "Qonto PHP client",
+  "version": "0.9.0",
+  "authors": [
+    {
+      "name": "TAVUX",
+      "homepage": "https://tavux.tech",
+      "email": "contact@tavux.tech"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "Tavux\\Qonto\\": "src/" }
+  },
+  "require": {
+    "php": ">=5.6",
+    "guzzlehttp/guzzle": "^6.4.1"
+  }
+}
