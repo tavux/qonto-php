@@ -14,7 +14,7 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
 
 ## How to install it ?
 
-`composer require qonto-php` 
+`composer require tavux/qonto-php` 
 
 ## How to use it ?
 
