@@ -6,9 +6,13 @@ use GuzzleHttp\Client;
 use Tavux\Qonto\Models\Attachment;
 use Tavux\Qonto\Models\BankAccount;
 use Tavux\Qonto\Models\Label;
+use Tavux\Qonto\Models\Labels;
 use Tavux\Qonto\Models\Membership;
+use Tavux\Qonto\Models\Memberships;
+use Tavux\Qonto\Models\Meta;
 use Tavux\Qonto\Models\Organization;
 use Tavux\Qonto\Models\Transaction;
+use Tavux\Qonto\Models\Transactions;
 
 /**
  * Class QontoClient
@@ -98,7 +102,7 @@ class QontoClient
      * @param string $sort_by
      * @param integer $current_page
      * @param integer $per_page
-     * @return Transaction[]
+     * @return Transactions
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listTransactions(
@@ -148,10 +152,17 @@ class QontoClient
 
         $response = $this->sendRequest('/transactions', $parameters);
 
-        $result = [];
+        $result = new Transactions();
+
+        $transactions = [];
 
         foreach ($response['transactions'] as $_transaction){
-            $result[] = new Transaction($_transaction->transaction);
+            $transactions[] = new Transaction($_transaction->transaction);
+        }
+
+        $result->transactions = $transactions;
+        if(isset($response['meta'])){
+            $result->meta = new Meta($response['meta']);
         }
 
         return $result;
@@ -160,7 +171,7 @@ class QontoClient
     /**
      * @param integer $current_page
      * @param integer $per_page
-     * @return Label[]
+     * @return Labels
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listLabels($current_page=null, $per_page=null){
@@ -175,10 +186,15 @@ class QontoClient
         }
         $response = $this->sendRequest('/labels', $parameters);
 
-        $result = [];
+        $result = new Labels();
+        $result->labels = [];
+
+        if(isset($response['meta'])){
+            $result->meta = new Meta($response['meta']);
+        }
 
         foreach ($response['labels'] as $_label){
-            $result[] = new Label($_label);
+            $result->labels[] = new Label($_label);
         }
 
         return $result;
@@ -187,7 +203,7 @@ class QontoClient
     /**
      * @param integer $current_page
      * @param integer $per_page
-     * @return Membership[]
+     * @return Memberships
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listMemberships($current_page=null, $per_page=null){
@@ -202,10 +218,15 @@ class QontoClient
         }
         $response = $this->sendRequest('/memberships', $parameters);
 
-        $result = [];
+        $result = new Memberships();
+        $result->memberships = [];
+
+        if(isset($response['meta'])){
+            $result->meta = new Meta($response['meta']);
+        }
 
         foreach ($response['memberships'] as $_membership){
-            $result[] = new Membership($_membership);
+            $result->memberships[] = new Membership($_membership);
         }
 
         return $result;

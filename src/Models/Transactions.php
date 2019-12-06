@@ -8,6 +8,7 @@ namespace Tavux\Qonto\Models;
  * @package Tavux\Qonto
  *
  * @property Transaction[] $transactions
+ * @property Meta $meta
  */
 class Transactions extends QontoApiModel
 {

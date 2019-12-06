@@ -2,7 +2,7 @@
   "name": "tavux/qonto-php",
   "license": "MIT",
   "description": "Qonto PHP client",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "TAVUX",

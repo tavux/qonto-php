@@ -8,6 +8,7 @@ namespace Tavux\Qonto\Models;
  * @package Tavux\Qonto\Models
  *
  * @property Membership[] $memberships
+ * @property Meta $meta
  */
 class Memberships extends QontoApiModel
 {
