@@ -10,14 +10,15 @@ use Tavux\Qonto\Models\Membership;
 use Tavux\Qonto\Models\Organization;
 use Tavux\Qonto\Models\Transaction;
 
-class Qonto
+class QontoClient
 {
+
+    const QONTO_URL = 'https://thirdparty.qonto.eu/v2';
+
     /**
      * @var Client $guzzle_client
      */
     private static $guzzle_client;
-
-    const QONTO_URL = 'https://thirdparty.qonto.eu/v2';
 
     /**
      * @var string $login
@@ -82,7 +83,18 @@ class Qonto
      * @return Transaction[]
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function listTransactions($slug, $iban=null, $status=null, $updated_at_from=null, $updated_at_to=null, $settled_at_from=null, $settled_at_to=null, $sort_by=null, $current_page=null, $per_page=null){
+    public function listTransactions(
+        $slug,
+        $iban=null,
+        $status=null,
+        $updated_at_from=null,
+        $updated_at_to=null,
+        $settled_at_from=null,
+        $settled_at_to=null,
+        $sort_by=null,
+        $current_page=null,
+        $per_page=null
+    ){
         $parameters = [];
 
         if($slug){

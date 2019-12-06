@@ -74,9 +74,9 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
 
 #### Example 
 ```php
-use \Tavux\Qonto\Qonto;
+use \Tavux\Qonto\QontoClient;
 
-$qonto = new Qonto('login', 'password');
+$qonto = new QontoClient('login', 'password');
 
 try {
     $organization = $qonto->getOrganization('company_id');

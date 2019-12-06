@@ -1,12 +1,12 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
 
-use \Tavux\Qonto\Qonto;
+use \Tavux\Qonto\QontoClient;
 
-$qonto = new Qonto('croissant-sas-1111', 'bcd0c05d5423');
+$qonto = new QontoClient('login', 'password');
 
 try {
-    $organization = $qonto->getOrganization('croissant-sas-1111');
+    $organization = $qonto->getOrganization('company_id');
     $transactions = $qonto->listTransactions($organization->bank_accounts[0]->slug);
     $labels = $qonto->listLabels();
     $memberships = $qonto->listMemberships();
