@@ -3,7 +3,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use \Tavux\Qonto\QontoClient;
 
-$qonto = new QontoClient('login', 'password');
+$qonto = new QontoClient('login', 'secret_key');
 
 try {
     $organization = $qonto->getOrganization('company_id');

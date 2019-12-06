@@ -10,6 +10,11 @@ use Tavux\Qonto\Models\Membership;
 use Tavux\Qonto\Models\Organization;
 use Tavux\Qonto\Models\Transaction;
 
+/**
+ * Class QontoClient
+ * @package Tavux\Qonto
+ *
+ */
 class QontoClient
 {
 
@@ -31,17 +36,30 @@ class QontoClient
     private $secret_key;
 
     /**
-     * Qonto constructor.
+     * QontoClient constructor
+     * @see https://api-doc.qonto.eu/2.0/welcome/authentication
+     *
      * @param string $login
      * @param string $secret_key
      */
     public function __construct($login, $secret_key)
     {
-        $this->login = $login;
-        $this->secret_key = $secret_key;
+        $this->setCredentials($login, $secret_key);
         if(self::$guzzle_client === null){
             self::$guzzle_client = new Client();
         }
+    }
+
+    /**
+     * Change credentials to connect to Qonto API
+     * @see https://api-doc.qonto.eu/2.0/welcome/authentication
+     *
+     * @param string $login
+     * @param string $secret_key
+     */
+    public function setCredentials($login, $secret_key){
+        $this->login = $login;
+        $this->secret_key = $secret_key;
     }
 
     /**

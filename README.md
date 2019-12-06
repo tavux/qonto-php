@@ -70,13 +70,22 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getOrganization($id);
+
+    /**
+     * Change credentials to connect to Qonto API
+     * @see https://api-doc.qonto.eu/2.0/welcome/authentication
+     *
+     * @param string $login
+     * @param string $secret_key
+     */
+    public function setCredentials($login, $secret_key);
 ```
 
 #### Example 
 ```php
 use \Tavux\Qonto\QontoClient;
 
-$qonto = new QontoClient('login', 'password');
+$qonto = new QontoClient('login', 'secret_key');
 
 try {
     $organization = $qonto->getOrganization('company_id');
