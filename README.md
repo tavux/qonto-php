@@ -36,7 +36,7 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
      * @param string $sort_by
      * @param integer $current_page
      * @param integer $per_page
-     * @return Transaction[]
+     * @return \Tavux\Qonto\Models\Transactions
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listTransactions($slug, $iban=null, $status=null, $updated_at_from=null, $updated_at_to=null, $settled_at_from=null, $settled_at_to=null, $sort_by=null, $current_page=null, $per_page=null);
@@ -44,7 +44,7 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
     /**
      * @param integer $current_page
      * @param integer $per_page
-     * @return Label[]
+     * @return \Tavux\Qonto\Models\Labels
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listLabels($current_page=null, $per_page=null);
@@ -52,7 +52,7 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
     /**
      * @param integer $current_page
      * @param integer $per_page
-     * @return Membership[]
+     * @return \Tavux\Qonto\Models\Memberships
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function listMemberships($current_page=null, $per_page=null);
@@ -89,11 +89,22 @@ $qonto = new QontoClient('login', 'secret_key');
 
 try {
     $organization = $qonto->getOrganization('company_id');
-    $transactions = $qonto->listTransactions($organization->bank_accounts[0]->slug);
+    $transactions = $qonto->listTransactions(
+        $organization->bank_accounts[0]->slug,
+        $organization->bank_accounts[0]->iban,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null
+    );
     $labels = $qonto->listLabels();
     $memberships = $qonto->listMemberships();
 
-    var_dump($organization, $transactions, $labels, $memberships);
+    var_dump($organization, $transactions->transactions, $labels->labels, $memberships->memberships);
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     echo $e->getMessage();
 }
