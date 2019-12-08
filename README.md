@@ -59,14 +59,14 @@ Qonto is a new bank company for freelancers & companies (more infos : [qonto.eu]
 
     /**
      * @param int $id
-     * @return Attachment
+     * @return \Tavux\Qonto\Models\Attachment
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getAttachment($id);
 
     /**
      * @param int $id
-     * @return Organization
+     * @return \Tavux\Qonto\Models\Organization
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getOrganization($id);
