@@ -157,7 +157,7 @@ class QontoClient
         $transactions = [];
 
         foreach ($response['transactions'] as $_transaction){
-            $transactions[] = new Transaction($_transaction->transaction);
+            $transactions[] = new Transaction($_transaction);
         }
 
         $result->transactions = $transactions;
