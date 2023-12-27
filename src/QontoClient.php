@@ -22,7 +22,7 @@ use Tavux\Qonto\Models\Transactions;
 class QontoClient
 {
 
-    const QONTO_URL = 'https://thirdparty.qonto.eu/v2';
+    const QONTO_URL = 'https://thirdparty.qonto.com/v2';
 
     /**
      * @var Client $guzzle_client
