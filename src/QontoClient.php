@@ -3,6 +3,7 @@
 namespace Tavux\Qonto;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Query;
 use Tavux\Qonto\Models\Attachment;
 use Tavux\Qonto\Models\BankAccount;
 use Tavux\Qonto\Models\Label;
@@ -81,7 +82,7 @@ class QontoClient
         $url = self::QONTO_URL.$url;
 
         $response = self::$guzzle_client->request('GET', $url, [
-            'query' => $parameters,
+            'query' => Query::build($parameters),
             'headers' => [
                 'Authorization' => $this->login.':'.$this->secret_key
             ],
@@ -115,7 +116,8 @@ class QontoClient
         $settled_at_to=null,
         $sort_by=null,
         $current_page=null,
-        $per_page=null
+        $per_page=null,
+        $includes=null
     ){
         $parameters = [];
 
@@ -148,6 +150,9 @@ class QontoClient
         }
         if($per_page){
             $parameters['per_page'] = $per_page;
+        }
+        if($includes){
+            $parameters['includes[]'] = $includes;
         }
 
         $response = $this->sendRequest('/transactions', $parameters);
